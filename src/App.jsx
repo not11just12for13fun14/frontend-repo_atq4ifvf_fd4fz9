@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import Packages from './components/Packages'
 import Testimonials from './components/Testimonials'
 import Booking from './components/Booking'
+import BackgroundFX from './components/BackgroundFX'
 
 function App() {
   const [profile, setProfile] = useState(null)
@@ -28,7 +29,6 @@ function App() {
         setPackages(pk.packages)
         setTestimonials(t.testimonials)
       } catch (e) {
-        // Fallback content if backend not ready
         setProfile({
           headline: 'Apex Legends Pro Coach • Ex-Pro & Former Predator',
           bio: 'I’ve run 3,000+ 1:1 sessions helping players climb with fundamentals that stick: rotations, comms, fights, and winning habits.',
@@ -52,13 +52,29 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-slate-950 scroll-smooth">
+      <BackgroundFX />
       <Navbar />
       <Hero profile={profile} />
-      <Packages packages={packages} onSelect={setSelected} />
-      <Testimonials testimonials={testimonials} />
-      <Booking selected={selected} />
-      <footer className="py-10 text-center text-slate-400 text-sm">© {new Date().getFullYear()} AnorakFPS — Apex Legends Coaching</footer>
+
+      <div className="relative">
+        <div className="pointer-events-none select-none absolute inset-x-0 -top-8 h-16 bg-gradient-to-b from-transparent via-white/5 to-transparent blur-2xl" />
+        <Packages packages={packages} onSelect={setSelected} />
+      </div>
+
+      <div className="relative">
+        <div className="pointer-events-none select-none absolute inset-x-0 -top-8 h-16 bg-gradient-to-b from-transparent via-white/5 to-transparent blur-2xl" />
+        <Testimonials testimonials={testimonials} />
+      </div>
+
+      <div className="relative">
+        <div className="pointer-events-none select-none absolute inset-x-0 -top-8 h-16 bg-gradient-to-b from-transparent via-white/5 to-transparent blur-2xl" />
+        <Booking selected={selected} />
+      </div>
+
+      <footer className="py-12 text-center text-slate-400 text-sm border-t border-white/10 bg-gradient-to-b from-transparent to-black/20">
+        © {new Date().getFullYear()} AnorakFPS — Apex Legends Coaching
+      </footer>
     </div>
   )
 }
